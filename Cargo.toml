@@ -33,4 +33,4 @@ nom = "7.1.3"
 
 [dev-dependencies]
 rfd = "0.11.0"
-eframe = "0.28.0"
+eframe = "0.26.0"
