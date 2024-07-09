@@ -610,7 +610,7 @@ impl Player {
                 .linear_multiply(seek_indicator_anim);
             let spinner_size = 20. * seek_indicator_anim;
             ui.painter()
-                .add(seek_indicator_shadow.as_shape(frame_response.rect, Rounding::ZERO));
+                .add(seek_indicator_shadow.tessellate(frame_response.rect, Rounding::ZERO));
             ui.put(
                 Rect::from_center_size(frame_response.rect.center(), Vec2::splat(spinner_size)),
                 Spinner::new().size(spinner_size),
@@ -692,7 +692,7 @@ impl Player {
         let seekbar_color = Color32::WHITE.linear_multiply(seekbar_anim_frac);
 
         ui.painter()
-            .add(shadow.as_shape(shadow_rect, Rounding::ZERO));
+            .add(shadow.tessellate(shadow_rect, Rounding::ZERO));
 
         ui.painter().rect_filled(
             fullseekbar_rect,

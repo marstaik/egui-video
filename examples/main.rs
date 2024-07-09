@@ -5,7 +5,7 @@ fn main() {
     let _ = eframe::run_native(
         "app",
         NativeOptions::default(),
-        Box::new(|_| Ok(Box::new(App::default()))),
+        Box::new(|_| Box::new(App::default())),
     );
 }
 struct App {
@@ -113,7 +113,7 @@ impl eframe::App for App {
                         ui.add(
                             DragValue::new(&mut self.seek_frac)
                                 .speed(0.05)
-                                .range(0.0..=1.0),
+                                .clamp_range(0.0..=1.0),
                         );
                         ui.checkbox(&mut player.options.looping, "loop");
                     });
@@ -140,10 +140,7 @@ impl eframe::App for App {
                         ui.label("volume");
                         let mut volume = player.options.audio_volume.get();
                         if ui
-                            .add(Slider::new(
-                                &mut volume,
-                                0.0..=player.options.max_audio_volume,
-                            ))
+                            .add(Slider::new(&mut volume, 0.0..=player.options.max_audio_volume))
                             .changed()
                         {
                             player.options.audio_volume.set(volume);
